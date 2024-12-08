@@ -31,10 +31,10 @@ const Contact: React.FC = () => {
           </a>
         </div>
         <p className="text-gray-600 dark:text-gray-400">
-          Let's work together to capture your perfect moments.
+          Let's work together to master the art of capturing your perfect moments.
         </p>
 
-        <div className="text-xs text-center text-gray-600 dark:text-gray-400 ">
+        <div className="text-xs text-center text-gray-600 dark:text-gray-400 mt-2">
           <p>© {new Date().getFullYear()} PhotoVista. All rights reserved.</p>
         </div>
       </div>

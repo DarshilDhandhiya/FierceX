@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Heart, Download, MapPin, Camera } from "lucide-react";
+import { Heart, Download, MapPin, Activity } from "lucide-react";
 import { Photo } from "../types";
 import { usePhotoStore } from "../store/usePhotoStore";
 import { useImageAspectRatio, getImageRowSpan } from "../utils/imageUtils";
@@ -44,16 +44,16 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onClick }) => {
 
         <div className="absolute bottom-0 left-0 right-0 p-3 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <h3 className="text-lg font-semibold line-clamp-1">{photo.title}</h3>
-          <p className="flex items-center gap-2 text-xs">
-            <Camera size={12} />
-            <span className="line-clamp-1">{photo.photographer}</span>
-          </p>
           {photo.location && (
             <p className="flex items-center gap-2 text-xs">
               <MapPin size={12} />
               <span className="line-clamp-1">{photo.location}</span>
             </p>
           )}
+          <p className="flex items-center gap-2 text-xs">
+            <Activity size={12} />
+            <span className="line-clamp-1">{photo.photographer}</span>
+          </p>
         </div>
       </div>
 

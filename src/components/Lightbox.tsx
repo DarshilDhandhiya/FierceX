@@ -70,13 +70,8 @@ const Lightbox: React.FC<LightboxProps> = ({
 
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
             <h2 className="text-6xl mb-2 font-bold text-white">{photo.title}</h2>
-            <p className="text-gray-200">{photo.photographer}</p>
-            {photo.camera && (
-              <p className="mt-2 text-sm text-gray-300">
-                {photo.camera.model} • f/{photo.camera.settings.aperture} •{' '}
-                {photo.camera.settings.shutterSpeed} • ISO{photo.camera.settings.iso}
-              </p>
-            )}
+            <p className="text-sm text-gray-300">{photo.location}</p>
+            <p className="text-sm text-gray-300">{photo.photographer}</p>
           </div>
 
           <button
