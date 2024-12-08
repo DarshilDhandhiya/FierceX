@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Download } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Download, MapPin, Activity } from 'lucide-react';
 import { Photo } from '../types';
 
 interface LightboxProps {
@@ -68,10 +68,18 @@ const Lightbox: React.FC<LightboxProps> = ({
             className="max-h-[90vh] max-w-[90vw] object-contain"
           />
 
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-white">
             <h2 className="text-6xl mb-2 font-bold text-white">{photo.title}</h2>
-            <p className="text-sm text-gray-300">{photo.location}</p>
+            {photo.location && (
+            <p className="flex items-center gap-2 text-xs">
+              <MapPin size={12} />
+              <p className="text-sm text-gray-300">{photo.location}</p>
+            </p>
+          )}
+          <p className="flex items-center gap-2 text-xs">
+            <Activity size={12} />
             <p className="text-sm text-gray-300">{photo.photographer}</p>
+          </p>
           </div>
 
           <button
