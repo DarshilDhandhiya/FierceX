@@ -1,14 +1,14 @@
 import { Photo } from './types';
 
 export const samplePhotos: Photo[] = [
-  // {
-  //   id: 'photo-1',
-  //   url: '/Pics/Trees-Farewell-to-the-Sun.png',
-  //   title: 'Trees Farewell To The Sun',
-  //   location: 'Unknown',
-  //   photographer: 'Trees Farewell To The Sun',
-  //   category: 'Forest',
-  // },
+  {
+    id: 'photo-1',
+    url: '/Pics/Trees-Farewell-to-the Sun.jpg',
+    title: 'Trees Farewell To The Sun',
+    location: 'Unknown',
+    photographer: 'Trees Farewell To The Sun',
+    category: 'Forest',
+  },
   {
     id: 'photo-2',
     url: '/Pics/Alpenglow.jpg',
@@ -91,10 +91,10 @@ export const samplePhotos: Photo[] = [
   },
   {
     id: 'photo-12',
-    url: '/Pics/coconet.jpg',
-    title: 'Coconet',
+    url: '/Pics/coconut.jpg',
+    title: 'coconut',
     location: 'Tropical Island',
-    photographer: 'Coconet',
+    photographer: 'coconut',
     category: 'Ocean',
   },
   {

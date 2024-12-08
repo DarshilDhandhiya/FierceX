@@ -81,16 +81,18 @@ const Lightbox: React.FC<LightboxProps> = ({
             <X size={24} />
           </button>
 
+          {/* Previous Button */}
           <button
             onClick={onPrevious}
-            className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-4 text-white transition-colors hover:bg-black/70"
+            className="absolute top-1/2 left-4 -translate-y-1/2 rounded-full bg-black/50 p-4 text-white transition-colors hover:bg-black/70"
           >
             <ChevronLeft size={24} />
           </button>
 
+          {/* Next Button */}
           <button
             onClick={onNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-4 text-white transition-colors hover:bg-black/70"
+            className="absolute top-1/2 right-4 -translate-y-1/2 rounded-full bg-black/50 p-4 text-white transition-colors hover:bg-black/70"
           >
             <ChevronRight size={24} />
           </button>
