@@ -10,7 +10,7 @@ import { Photo } from './types';
 const samplePhotos: Photo[] = [
   {
     id: 'photo-1',
-    url: '/Pics/Sky.jpg',
+    url: 'https://fiercexd.s3.us-east-1.amazonaws.com/Pics/IMG20240718193009.jpg',
     title: 'Mountain Landscape',
     photographer: 'John Doe',
     location: 'Swiss Alps',
@@ -28,7 +28,7 @@ const samplePhotos: Photo[] = [
   },
   {
     id: 'photo-2',
-    url: '/Pics/Duck.jpg',
+    url: '/Pics/1.jpg',
     title: 'Lake Sunset',
     photographer: 'Jane Smith',
     location: 'Maldives',
