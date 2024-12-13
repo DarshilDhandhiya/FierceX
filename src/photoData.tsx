@@ -3,7 +3,7 @@ import { Photo } from './types';
 export const samplePhotos: Photo[] = [
   {
     id: 'photo-1',
-    url: '/Pics/Trees-Farewell-to-the Sun.jpg',
+    url: '/Pics/Trees-Farewell-To-The-Sun.jpg',
     title: 'Trees Farewell To The Sun',
     location: 'Unknown',
     photographer: 'Trees Farewell To The Sun',
