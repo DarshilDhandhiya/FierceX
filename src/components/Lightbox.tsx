@@ -89,13 +89,17 @@ const Lightbox: React.FC<LightboxProps> = ({
                 >
                   <Heart size={20} fill={isLiked ? "currentColor" : "none"} />
                 </motion.button>
-                <motion.button
+                {/* Updated Download Button */}
+                <motion.a
+                  href={photo.url}
+                  download={photo.title || 'photo'}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   className="rounded-full bg-white/10 p-3 text-white backdrop-blur-md transition-colors hover:bg-white/20"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <Download size={20} />
-                </motion.button>
+                </motion.a>
               </div>
             </div>
           </motion.div>
