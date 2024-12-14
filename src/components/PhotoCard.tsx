@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, Download, MapPin, Activity } from "lucide-react";
+import { Heart, Download, MapPin, Activity, Share2 } from "lucide-react";
 import { Photo } from "../types";
 import { usePhotoStore } from "../store/usePhotoStore";
 import { useImageAspectRatio, getImageRowSpan } from "../utils/imageUtils";
@@ -78,6 +78,32 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onClick }) => {
       URL.revokeObjectURL(link.href);
     } catch (error) {
       console.error("Error downloading the image:", error);
+    }
+  };
+
+  // Function to handle sharing
+  const handleShare = async () => {
+    const shareData = {
+      title: photo.title,
+      text: `Check out this photo: ${photo.title}`,
+      url: photo.url,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        console.log("Image shared successfully!");
+      } catch (err) {
+        console.error("Error sharing the image:", err);
+      }
+    } else {
+      // Fallback: copy URL to clipboard
+      try {
+        await navigator.clipboard.writeText(photo.url);
+        alert("URL copied to clipboard!");
+      } catch (err) {
+        console.error("Error copying URL to clipboard:", err);
+      }
     }
   };
 
@@ -188,6 +214,24 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onClick }) => {
                     text-white shadow-lg transition-colors hover:bg-white/20"
                 >
                   <Download size={18} />
+                </motion.button>
+
+                {/* Share Button */}
+                <motion.button
+                  variants={buttonVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleShare();
+                  }}
+                  className="rounded-full bg-white/10 backdrop-blur-md p-3 
+                    text-white shadow-lg transition-colors hover:bg-white/20"
+                >
+                  <Share2 size={18} />
                 </motion.button>
               </>
             )}
