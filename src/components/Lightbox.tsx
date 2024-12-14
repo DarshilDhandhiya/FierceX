@@ -31,6 +31,33 @@ const Lightbox: React.FC<LightboxProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose, onPrevious, onNext]);
 
+  // Function to handle direct download
+  const handleDownload = async (url: string, fileName: string) => {
+    try {
+      // Fetch the image data as a blob
+      const response = await fetch(url, { mode: 'cors' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch the image.');
+      }
+      const blob = await response.blob();
+
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = fileName;
+
+      // Trigger the download and clean up
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Revoke the object URL to free memory
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.error('Error downloading the image:', error);
+    }
+  };
+
   return (
     <AnimatePresence>
       <motion.div
@@ -89,17 +116,19 @@ const Lightbox: React.FC<LightboxProps> = ({
                 >
                   <Heart size={20} fill={isLiked ? "currentColor" : "none"} />
                 </motion.button>
+
                 {/* Updated Download Button */}
-                <motion.a
-                  href={photo.url}
-                  download={photo.title || 'photo'}
+                <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   className="rounded-full bg-white/10 p-3 text-white backdrop-blur-md transition-colors hover:bg-white/20"
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDownload(photo.url, photo.title || 'photo');
+                  }}
                 >
                   <Download size={20} />
-                </motion.a>
+                </motion.button>
               </div>
             </div>
           </motion.div>
