@@ -3,7 +3,7 @@ import { Photo } from './types';
 export const samplePhotos: Photo[] = [
   {
     id: 'photo-1',
-    url: '/Pics/Alpenglow.jpg',
+    url: 'https://res.cloudinary.com/dhsuepneb/image/upload/v1734158159/FIERCEX/Alpenglow.jpg',
     title: 'Alpenglow',
     location: 'Swiss Alps',
     photographer: 'Alpenglow',
@@ -19,7 +19,7 @@ export const samplePhotos: Photo[] = [
   },
   {
     id: 'photo-3',
-    url: '/Pics/Blossoms-Petals.jpg',
+    url: 'https://res.cloudinary.com/dhsuepneb/image/upload/v1734158153/FIERCEX/Blossoms-Petals.jpg',
     title: 'Blossoms Petals',
     location: 'Unknown',
     photographer: 'Blossoms Petals',
@@ -35,7 +35,7 @@ export const samplePhotos: Photo[] = [
   },
   {
     id: 'photo-5',
-    url: '/Pics/Shocked-Cat.jpg',
+    url: 'https://res.cloudinary.com/dhsuepneb/image/upload/v1734158143/FIERCEX/Shocked-Cat.jpg',
     title: 'Shocked Cat',
     location: 'Unknown',
     photographer: 'Cat Staring',
@@ -51,7 +51,7 @@ export const samplePhotos: Photo[] = [
   },
   {
     id: 'photo-7',
-    url: '/Pics/Cloudy-Moon.jpg',
+    url: 'https://res.cloudinary.com/dhsuepneb/image/upload/v1734158146/FIERCEX/Cloudy-Moon.jpg',
     title: 'Cloudy Moon',
     location: 'Unknown',
     photographer: 'Cloud Moon',
@@ -131,7 +131,7 @@ export const samplePhotos: Photo[] = [
   },
   {
     id: 'photo-17',
-    url: '/Pics/Golden-Peak.jpg',
+    url: 'https://res.cloudinary.com/dhsuepneb/image/upload/v1734158144/FIERCEX/Golden-Peak.jpg',
     title: 'Golden Peak',
     location: 'Himalayas',
     photographer: 'Golden Peak',
@@ -187,7 +187,7 @@ export const samplePhotos: Photo[] = [
   },
   {
     id: 'photo-24',
-    url: '/Pics/Nepal-Cityscape.jpg',
+    url: 'https://res.cloudinary.com/dhsuepneb/image/upload/v1734158144/FIERCEX/Nepal-Cityscape.jpg',
     title: 'Nepal Cityscape',
     location: 'Nepal',
     photographer: 'Nepal Cityscape',
@@ -235,7 +235,7 @@ export const samplePhotos: Photo[] = [
   },
   {
     id: 'photo-30',
-    url: '/Pics/Weaving-Web.jpg',
+    url: 'https://res.cloudinary.com/dhsuepneb/image/upload/v1734158154/FIERCEX/Weaving-Web.jpg',
     title: 'Weaving Web',
     location: 'Unknown',
     photographer: 'Weaving Web',
@@ -259,7 +259,7 @@ export const samplePhotos: Photo[] = [
   },
   {
     id: 'photo-33',
-    url: '/Pics/Sunny-Shaam.jpg',
+    url: 'https://res.cloudinary.com/dhsuepneb/image/upload/v1734158148/FIERCEX/Sunny-Shaam.jpg',
     title: 'Sunny Shaam',
     location: 'Maldives',
     photographer: 'Sunny Shaam',
