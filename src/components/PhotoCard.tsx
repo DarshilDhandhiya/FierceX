@@ -58,52 +58,13 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onClick }) => {
     },
   };
 
-  // Function to handle direct download
-  const handleDownload = async (url: string, fileName: string) => {
+  // Function to handle URL copy to clipboard
+  const handleCopyToClipboard = async () => {
     try {
-      const response = await fetch(url, { mode: "cors" });
-      if (!response.ok) {
-        throw new Error("Failed to fetch the image.");
-      }
-      const blob = await response.blob();
-
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = fileName;
-
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      URL.revokeObjectURL(link.href);
+      await navigator.clipboard.writeText(photo.url);
+      // alert("Image URL copied to clipboard!");
     } catch (error) {
-      console.error("Error downloading the image:", error);
-    }
-  };
-
-  // Function to handle sharing
-  const handleShare = async () => {
-    const shareData = {
-      title: photo.title,
-      text: `Check out this photo: ${photo.title}`,
-      url: photo.url,
-    };
-
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-        console.log("Image shared successfully!");
-      } catch (err) {
-        console.error("Error sharing the image:", err);
-      }
-    } else {
-      // Fallback: copy URL to clipboard
-      try {
-        await navigator.clipboard.writeText(photo.url);
-        alert("URL copied to clipboard!");
-      } catch (err) {
-        console.error("Error copying URL to clipboard:", err);
-      }
+      console.error("Failed to copy URL to clipboard:", error);
     }
   };
 
@@ -198,7 +159,7 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onClick }) => {
                   <Heart size={18} fill={isLiked ? "currentColor" : "none"} />
                 </motion.button>
 
-                {/* Updated Download Button */}
+                {/* Download Button */}
                 <motion.button
                   variants={buttonVariants}
                   initial="hidden"
@@ -208,7 +169,11 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onClick }) => {
                   whileTap={{ scale: 0.9 }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleDownload(photo.url, photo.title || "photo");
+                    const fileName = photo.title || "photo";
+                    const link = document.createElement("a");
+                    link.href = photo.url;
+                    link.download = fileName;
+                    link.click();
                   }}
                   className="rounded-full bg-white/10 backdrop-blur-md p-3 
                     text-white shadow-lg transition-colors hover:bg-white/20"
@@ -216,7 +181,7 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onClick }) => {
                   <Download size={18} />
                 </motion.button>
 
-                {/* Share Button */}
+                {/* Copy URL to Clipboard */}
                 <motion.button
                   variants={buttonVariants}
                   initial="hidden"
@@ -226,7 +191,7 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onClick }) => {
                   whileTap={{ scale: 0.9 }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleShare();
+                    handleCopyToClipboard();
                   }}
                   className="rounded-full bg-white/10 backdrop-blur-md p-3 
                     text-white shadow-lg transition-colors hover:bg-white/20"

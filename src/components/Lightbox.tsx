@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Download, MapPin, Activity, Heart } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Download, MapPin, Activity, Heart, Share2 } from 'lucide-react'; // Added Share2 icon
 import { Photo } from '../types';
 import { usePhotoStore } from '../store/usePhotoStore';
 
@@ -34,27 +34,31 @@ const Lightbox: React.FC<LightboxProps> = ({
   // Function to handle direct download
   const handleDownload = async (url: string, fileName: string) => {
     try {
-      // Fetch the image data as a blob
       const response = await fetch(url, { mode: 'cors' });
       if (!response.ok) {
         throw new Error('Failed to fetch the image.');
       }
       const blob = await response.blob();
 
-      // Create a temporary link element
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       link.download = fileName;
-
-      // Trigger the download and clean up
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-
-      // Revoke the object URL to free memory
       URL.revokeObjectURL(link.href);
     } catch (error) {
       console.error('Error downloading the image:', error);
+    }
+  };
+
+  // Function to copy the URL to clipboard
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(photo.url);
+      console.log('Image URL copied to clipboard!');
+    } catch (error) {
+      console.error('Failed to copy URL to clipboard:', error);
     }
   };
 
@@ -128,6 +132,19 @@ const Lightbox: React.FC<LightboxProps> = ({
                   }}
                 >
                   <Download size={20} />
+                </motion.button>
+
+                {/* New Share Button */}
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="rounded-full bg-white/10 p-3 text-white backdrop-blur-md transition-colors hover:bg-white/20"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleShare(); // Call the share handler
+                  }}
+                >
+                  <Share2 size={20} />
                 </motion.button>
               </div>
             </div>
