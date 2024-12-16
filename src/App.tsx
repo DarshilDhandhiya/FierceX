@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { usePhotoStore } from './store/usePhotoStore';
 import { Header } from './components/Header';
 import PhotoGrid from './components/PhotoGrid';
-import Lightbox from './components/Lightbox';
 import Footer from './components/Footer';
-import { samplePhotos } from './photoData'; // Import photo data
+import { samplePhotos } from './photoData';
+
+const Lightbox = React.lazy(() => import('./components/Lightbox'));
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Loading state
   const { currentPhoto, setCurrentPhoto, addPhotos, filteredPhotos } = usePhotoStore();
 
   useEffect(() => {
-    // Load initial photos
-    addPhotos(samplePhotos);
+    // Simulate fetching photos
+    setTimeout(() => {
+      addPhotos(samplePhotos);
+      setIsLoading(false); // Set loading to false after fetching
+    }, 2000); // Simulate network delay
   }, [addPhotos]);
 
   useEffect(() => {
@@ -42,19 +47,27 @@ function App() {
   return (
     <div className="min-h-screen bg-white text-gray-900 transition-colors dark:bg-gray-900 dark:text-white">
       <Header darkMode={darkMode} onToggleDarkMode={() => setDarkMode(!darkMode)} />
-      
-      <main className="container mx-auto py-8">
-        <PhotoGrid photos={filteredPhotos()} onPhotoClick={setCurrentPhoto} />
-      </main>
-      <Footer />
 
+      <main className="container mx-auto py-8">
+        {isLoading ? (
+          <div className="flex justify-center items-center h-screen">
+            <div className="loader"></div> {/* Loading spinner */}
+          </div>
+        ) : (
+          <PhotoGrid photos={filteredPhotos()} onPhotoClick={setCurrentPhoto} />
+        )}
+      </main>
+
+      <Footer />
       {currentPhoto && (
-        <Lightbox
-          photo={currentPhoto}
-          onClose={() => setCurrentPhoto(null)}
-          onPrevious={handlePrevious}
-          onNext={handleNext}
-        />
+        <Suspense fallback={<div>Loading Lightbox...</div>}>
+          <Lightbox
+            photo={currentPhoto}
+            onClose={() => setCurrentPhoto(null)}
+            onPrevious={handlePrevious}
+            onNext={handleNext}
+          />
+        </Suspense>
       )}
     </div>
   );
